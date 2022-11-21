@@ -1,0 +1,7 @@
+{
+  "name": "nTireMobileFM",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

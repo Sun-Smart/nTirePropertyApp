@@ -1,0 +1,32 @@
+.sideNav-pfCard {
+    background-image: linear-gradient(#1607bf, #4d40d0);
+}
+
+.col-class {
+    ion-list-header {
+        color: white;
+    }
+}
+ion-label {
+    font-size: 15px !important;
+}
+ion-note {
+    color: aliceblue;
+}
+
+.ion-padding {
+    background-color: #f8faff;
+}
+.ion-padding {
+    ion-item {
+        --background: var(--ion-item-background, var(--ion-background-color, #f8faff));
+    }
+}
+
+.sideNav-footer{
+    background-color: #f4f5f8;
+    position: absolute;
+    bottom: 0;
+    color: red;
+    font-weight: 800;
+}

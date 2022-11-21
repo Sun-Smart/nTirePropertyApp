@@ -1,0 +1,119 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+
+      <ion-row>
+        <ion-col size="12" class="dashHdr-col">
+          <ion-label>sundar</ion-label>
+          <!-- <img src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"
+            alt="avatar" class="header-img"> -->
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+  <ion-row>
+    <ion-col size="12" class="col-dash">
+      <ion-label>FM DASHBOARD</ion-label>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="dash-chartMenu">
+    <ion-col size="3"  (click)="activeCustomer();">
+      <img src="assets/dashboard/Customer.png" *ngIf="showCustomerNormal"/>
+      <img src="assets/dashboardactive/Customer_Payments.png" *ngIf="showCustomeractive"/>
+    </ion-col>
+
+    <ion-col size="3" (click)="activeProperty();">
+      <img src="assets/dashboard/Property.png"  *ngIf="showPropertynormal"/>
+      <img src="assets/dashboardactive/Property_Status.png"  *ngIf="showPropertyactive"/>
+    </ion-col>
+
+    <ion-col size="3">
+      <img src="assets/dashboard/To_be_Vacant.png"  (click)="activeVacant();" *ngIf="showVacantnormal"/>
+      <img src="assets/dashboardactive/To_be_vacant.png"  *ngIf="showVacantActive"/>
+    </ion-col>
+
+    <ion-col size="3">
+      <img src="assets/dashboard/Issue_Status.png"  (click)="activeStatus();" *ngIf="showStatusnormal"/>
+      <img src="assets/dashboardactive/Issue_Status.png"  *ngIf="showStatusActive"/>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="dash-chartLabel-Menu">
+    <ion-col size="3">
+      <ion-label>
+        Customer Payment
+      </ion-label>
+    </ion-col>
+
+    <ion-col size="3">
+      <ion-label>
+        Property <br />Status
+      </ion-label>
+    </ion-col>
+
+    <ion-col size="3">
+      <ion-label>
+        To <br />Be Vacant
+      </ion-label>
+    </ion-col>
+
+    <ion-col size="3">
+      <ion-label>
+        Issue <br />Status
+      </ion-label>
+    </ion-col>
+  </ion-row>
+
+  <ion-card style="z-index: 1;margin-top: 10px;">
+    <ion-card-header class="card_header">
+      <ion-row>
+        <ion-col>
+          <ion-label> Customer Payments</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #sourcecanvas2 id="sourcecanvas2" class="chart chart-doughnut" width="400" height="400" chart-data="data2"
+        chart-labels="labels2" chart-options="options" chart-dataset-override="datasetOverride" legend="true">
+      </canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-tabs>
+
+    <ion-fab vertical="bottom" horizontal="center" translucent="true">
+      <ion-fab-button>
+        <ion-icon name="camera"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-tab-bar slot="bottom" class="ion-no-border">
+      <ion-tab-button (click)="het()">
+        <img src="assets/tab_bar/Customer.png" /> Customer
+      </ion-tab-button>
+
+      <ion-tab-button class="comments">
+        <img src="assets/tab_bar/My_Task.png" />
+        My Task
+      </ion-tab-button>
+      <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd">
+        </path>
+      </svg>
+      <ion-tab-button class="notifs">
+        <img src="assets/tab_bar/Aditional_charge.png" /> Additional
+      </ion-tab-button>
+      <ion-tab-button>
+        <img src="assets/tab_bar/Transaction.png" />
+        Transaction
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+
+</ion-content>

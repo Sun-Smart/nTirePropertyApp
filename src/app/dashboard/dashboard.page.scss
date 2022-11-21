@@ -1,0 +1,115 @@
+ion-content,
+ion-toolbar {
+    --background: url("../../assets/loginImages/content-bg.png") no-repeat !important;
+    position: relative;
+}
+
+.header-ios ion-toolbar:last-of-type {
+    --border-width: 0px;
+}
+.header-img {
+    max-width: 12%;
+    border-radius: 50%;
+}
+.dashHdr-col {
+    display: flex;
+    justify-content: end;
+}
+.dashHdr-col {
+    ion-label {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 8px;
+    }
+}
+.col-dash {
+    display: flex;
+    justify-content: left;
+}
+.col-dash {
+    ion-label {
+        font-weight: bolder;
+    }
+}
+.chart-tab {
+    background: linear-gradient(to left, #b9b5db, #e5e5f8);
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+}
+.dash-chartMenu {
+    ion-col {
+        display: flex;
+        justify-content: center;
+    }
+}
+.dash-chartLabel-Menu {
+    ion-col {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-size: 11px;
+    }
+}
+ ion-card{
+    height: 350px;
+ }
+
+.header-ios ion-toolbar:last-of-type {
+    --border-width: 0 0 0px !important;
+}
+ion-tabs {
+    ion-fab {
+        margin-bottom: env(safe-area-inset-bottom);
+
+        /* fix notch ios*/
+        ion-fab-button {
+            --box-shadow: none;
+        }
+    }
+
+    ion-tab-bar {
+        --border: 0;
+        --background: transparent;
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        height: 70px;
+        width: 100%;
+
+        &:after {
+            content: " ";
+            width: 100%;
+            bottom: 0;
+            background: var(--ion-color-light);
+            height: env(safe-area-inset-bottom);
+            position: absolute;
+        }
+
+        ion-tab-button {
+            --background: var(--ion-color-light);
+        }
+
+        ion-tab-button.comments {
+            margin-right: 0px;
+            border-top-right-radius: 18px;
+        }
+
+        ion-tab-button.notifs {
+            margin-left: 0px;
+            border-top-left-radius: 18px;
+        }
+
+        svg {
+            width: 72px;
+            // margin-top: 19px;
+            margin-top: 25px;
+
+            path {
+                fill: var(--ion-color-light);
+            }
+        }
+    }
+}

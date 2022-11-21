@@ -1,0 +1,67 @@
+<ion-content>
+
+  <div class="login-bg">
+    <div class="login-dark-bg1"></div>
+    <div class="login-dark-bg2"></div>
+  </div>
+
+  <div class="login-content">
+    <ion-row>
+      <ion-col size="12" class="col-class" style="margin: 10% auto;">
+        <ion-label class="login-header-label"><span style="font-family: Raleway;">W</span>elcome to <span
+            style="font-weight: 800;">nTireFM</span></ion-label>
+      </ion-col>
+
+      <ion-col size="12" class="login-imgCol">
+        <img src="../../assets/loginImages/login image person.png" alt="" class="log-img">
+      </ion-col>
+
+    
+
+      <ion-col size="12">
+        <ion-card class="login-card">
+          <ion-card-header>
+            <ion-card-title>Login</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+
+            <form [formGroup]="loginData" (ngSubmit)="loginForm()" novalidate>
+              <ion-item>
+                <ion-label position="floating" class="login-label">User Name</ion-label>
+                <ion-input formControlName="username"></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-label position="floating" class="login-label">Password</ion-label>
+                <ion-input formControlName="password"></ion-input>
+              </ion-item>
+
+              <ion-row>
+                <ion-col size="12" class="login-label-frgt">
+                  <ion-label>Forgot Password?</ion-label>
+                </ion-col>
+
+                <ion-col size="1"></ion-col>
+                <ion-col size="10">
+                  <ion-button expand="block" shape="round" color="favorite" type="submit" [disabled]="!loginData.valid">LOG IN</ion-button>
+                </ion-col>
+                <ion-col size="1"></ion-col>
+              </ion-row>
+            </form>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-footer class="loginfooter">
+    <ion-row>
+      <ion-col size="12" class="col-class">
+        ©2022 SunSmart Global Inc. All Rights Reserved.
+      </ion-col>
+    </ion-row>
+  </ion-footer>
+
+
+</ion-content>

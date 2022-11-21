@@ -1,0 +1,109 @@
+<div>
+  <div class="sideNav-pfCard">
+    <ion-row style="padding-top:20px;" *ngFor="let item of userDetails">
+      <ion-col size="3" class="col-class">
+        <img src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"
+          alt="avatar" style="max-width: 80%;border-radius: 50%;">
+      </ion-col>
+      <ion-col size="9" class="col-class">
+        <ion-list-header>{{item.username}}</ion-list-header>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-note>{{item.property_name}}</ion-note><br />
+        <ion-note>{{item.location}}</ion-note>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <ion-list>
+    <ion-list style="padding: 0;">
+      <ion-item slot="header" lines="none" (click)="dashboard()">
+        <ion-icon name="logo-microsoft"></ion-icon> &nbsp;&nbsp;&nbsp;
+        <ion-label>Dashboard</ion-label>
+      </ion-item>
+      <ion-item slot="header" lines="none" (click)="cutomer()">
+        <ion-icon name="people"></ion-icon> &nbsp;&nbsp;&nbsp;
+        <ion-label>Customer</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-accordion-group>
+      <ion-accordion value="first">
+        <ion-item slot="header" color="light">
+          <ion-icon name="person"></ion-icon> &nbsp;&nbsp;&nbsp;
+          <ion-label>Employees</ion-label>
+        </ion-item>
+
+        <div class="ion-padding" slot="content">
+          <ion-list lines="none" style="padding:0px;margin: 0 20px;">
+            <ion-item (click)="myTask()">
+              <ion-icon name="clipboard"></ion-icon> &nbsp;&nbsp;&nbsp;
+              <ion-label>My Task</ion-label>
+            </ion-item>
+
+            <ion-item (click)="additionalCharges()">
+              <ion-icon name="logo-usd"></ion-icon> &nbsp;&nbsp;&nbsp;
+              <ion-label>Additional Charges</ion-label>
+            </ion-item>
+
+            <ion-item (click)="quickReciept()">
+              <ion-icon name="receipt"></ion-icon> &nbsp;&nbsp;&nbsp;
+              <ion-label>Quick Reciept</ion-label>
+            </ion-item>
+
+            <ion-item (click)="transaction()">
+              <ion-icon name="swap-horizontal"></ion-icon> &nbsp;&nbsp;&nbsp;
+              <ion-label>Transaction</ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-accordion>
+
+      <ion-accordion value="second">
+        <ion-item slot="header" color="light">
+          <ion-icon name="documents"></ion-icon> &nbsp;&nbsp;&nbsp;
+          <ion-label>Reports</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <ion-list lines="none" style="padding:0px;margin: 0 20px;">
+
+            <ion-item (click)="propertyList()">
+              <ion-icon name="document-text"></ion-icon> &nbsp;&nbsp;&nbsp;
+              <ion-label>Property List</ion-label>
+            </ion-item>
+
+            <ion-item (click)="paymentDetails()">
+              <ion-icon name="document-lock"></ion-icon> &nbsp;&nbsp;&nbsp;
+              <ion-label>Payment Details</ion-label>
+            </ion-item>
+
+            <ion-item (click)="issueLedger()">
+              <ion-icon name="bookmarks"></ion-icon> &nbsp;&nbsp;&nbsp;
+              <ion-label>Issue Ledger</ion-label>
+            </ion-item>
+
+            <ion-item (click)="documentExpiryReport()">
+              <ion-icon name="hourglass"></ion-icon> &nbsp;&nbsp;&nbsp;
+              <ion-label>Document Expiry Report</ion-label>
+            </ion-item>
+
+            <ion-item (click)="prpertyContactList()">
+              <ion-icon name="calculator"></ion-icon> &nbsp;&nbsp;&nbsp;
+              <ion-label>Prperty Contact List</ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </ion-list>
+
+  <ion-footer class="sideNav-footer">
+    <ion-row>
+      <ion-col size="12" class="col-class">
+        <ion-icon name="power"></ion-icon> &nbsp;
+        <ion-label (click)="logout()">LOGOUT</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-footer>
+</div>
