@@ -51,14 +51,14 @@ export class DashboardPage implements OnInit {
   // showProperty: boolean | undefined;
   // showVacant: boolean | undefined;
   // showStatus: boolean | undefined;
-  showCustomeractive: boolean = false;
+  showCustomeractive: boolean = true;
   showVacantActive: boolean = false;
   showPropertyactive: boolean = false;
   showStatusActive: boolean = false;
-  showCustomerNormal: boolean= true;
-  showPropertynormal: boolean= true;
-  showVacantnormal: boolean= true;
-  showStatusnormal: boolean= true;
+  showCustomerNormal: boolean = false;
+  showPropertynormal: boolean = true;
+  showVacantnormal: boolean = true;
+  showStatusnormal: boolean = true;
 
   constructor(private http: HttpClient,
     private platform: Platform,
@@ -271,7 +271,7 @@ export class DashboardPage implements OnInit {
     this.showVacantActive = false;
     this.showVacantnormal = true;
 
-    this.showStatusActive = false;
-    this.showStatusnormal = true;
+    this.showStatusActive = true;
+    this.showStatusnormal = false;
   }
 }

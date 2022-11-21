@@ -24,24 +24,28 @@
   </ion-row>
 
   <ion-row class="dash-chartMenu">
-    <ion-col size="3"  (click)="activeCustomer();">
-      <img src="assets/dashboard/Customer.png" *ngIf="showCustomerNormal"/>
-      <img src="assets/dashboardactive/Customer_Payments.png" *ngIf="showCustomeractive"/>
+    <ion-col size="3">
+      <div>
+        <a href="javascript:void(0);" (click)="activeCustomer();">
+          <img src="assets/dashboard/Customer.png" *ngIf="showCustomerNormal" />
+          <img src="assets/dashboardactive/Customer_Payments.png" *ngIf="showCustomeractive" />
+        </a>
+      </div>
     </ion-col>
 
     <ion-col size="3" (click)="activeProperty();">
-      <img src="assets/dashboard/Property.png"  *ngIf="showPropertynormal"/>
-      <img src="assets/dashboardactive/Property_Status.png"  *ngIf="showPropertyactive"/>
+      <img src="assets/dashboard/Property.png" *ngIf="showPropertynormal" />
+      <img src="assets/dashboardactive/Property_Status.png" *ngIf="showPropertyactive" />
     </ion-col>
 
     <ion-col size="3">
-      <img src="assets/dashboard/To_be_Vacant.png"  (click)="activeVacant();" *ngIf="showVacantnormal"/>
-      <img src="assets/dashboardactive/To_be_vacant.png"  *ngIf="showVacantActive"/>
+      <img src="assets/dashboard/To_be_Vacant.png" (click)="activeVacant();" *ngIf="showVacantnormal" />
+      <img src="assets/dashboardactive/To_be_vacant.png" *ngIf="showVacantActive" />
     </ion-col>
 
     <ion-col size="3">
-      <img src="assets/dashboard/Issue_Status.png"  (click)="activeStatus();" *ngIf="showStatusnormal"/>
-      <img src="assets/dashboardactive/Issue_Status.png"  *ngIf="showStatusActive"/>
+      <img src="assets/dashboard/Issue_Status.png" (click)="activeStatus();" *ngIf="showStatusnormal" />
+      <img src="assets/dashboardactive/Issue_Status.png" *ngIf="showStatusActive" />
     </ion-col>
   </ion-row>
 

@@ -42,6 +42,7 @@ ion-toolbar {
     ion-col {
         display: flex;
         justify-content: center;
+        z-index: 1;
     }
 }
 .dash-chartLabel-Menu {
