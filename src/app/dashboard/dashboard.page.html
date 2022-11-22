@@ -1,3 +1,4 @@
+<!-- eslint-disable @angular-eslint/template/eqeqeq -->
 <ion-content>
   <ion-header>
     <ion-toolbar>
@@ -7,7 +8,7 @@
 
       <ion-row>
         <ion-col size="12" class="dashHdr-col">
-          <ion-label>sundar</ion-label>
+          <ion-label><b>{{username}}</b></ion-label>
           <!-- <img src="https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg"
             alt="avatar" class="header-img"> -->
         </ion-col>
@@ -24,13 +25,9 @@
   </ion-row>
 
   <ion-row class="dash-chartMenu">
-    <ion-col size="3">
-      <div>
-        <a href="javascript:void(0);" (click)="activeCustomer();">
-          <img src="assets/dashboard/Customer.png" *ngIf="showCustomerNormal" />
-          <img src="assets/dashboardactive/Customer_Payments.png" *ngIf="showCustomeractive" />
-        </a>
-      </div>
+    <ion-col size="3" (click)="customerPayments();">
+      <img src="assets/dashboard/Customer.png" *ngIf="showCustomerNormal" />
+      <img src="assets/dashboardactive/Customer_Payments.png" *ngIf="showCustomeractive" />
     </ion-col>
 
     <ion-col size="3" (click)="activeProperty();">
@@ -38,13 +35,13 @@
       <img src="assets/dashboardactive/Property_Status.png" *ngIf="showPropertyactive" />
     </ion-col>
 
-    <ion-col size="3">
-      <img src="assets/dashboard/To_be_Vacant.png" (click)="activeVacant();" *ngIf="showVacantnormal" />
+    <ion-col size="3" (click)="activeVacant();">
+      <img src="assets/dashboard/To_be_Vacant.png" *ngIf="showVacantnormal" />
       <img src="assets/dashboardactive/To_be_vacant.png" *ngIf="showVacantActive" />
     </ion-col>
 
-    <ion-col size="3">
-      <img src="assets/dashboard/Issue_Status.png" (click)="activeStatus();" *ngIf="showStatusnormal" />
+    <ion-col size="3" (click)="activeStatus();">
+      <img src="assets/dashboard/Issue_Status.png" *ngIf="showStatusnormal" />
       <img src="assets/dashboardactive/Issue_Status.png" *ngIf="showStatusActive" />
     </ion-col>
   </ion-row>
@@ -75,7 +72,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-card style="z-index: 1;margin-top: 10px;">
+  <ion-card style="z-index: 1;margin-top: 10px;" *ngIf="showCustomerPayment">
     <ion-card-header class="card_header">
       <ion-row>
         <ion-col>
@@ -90,15 +87,119 @@
     </ion-card-content>
   </ion-card>
 
+  <ion-card style="z-index: 1;margin-top: 10px;" *ngIf="showPropertyStatus">
+    <ion-card-header class="card_header">
+      <ion-row>
+        <ion-col>
+          <ion-label> Property Status</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #sourcecanvas1 id="sourcecanvas1"></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card style="z-index: 1;margin-top: 10px;" *ngIf="showtobevacant">
+    <ion-card-header class="card_header">
+      <ion-row>
+        <ion-col>
+          <ion-label> To Be Vacant</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #sourcecanvas3 id="sourcecanvas3"></canvas>
+    </ion-card-content>
+  </ion-card>
+  <ion-card style="z-index: 1;" *ngIf="showissuestatus">
+    <ion-card-header class="card_header">
+      <ion-row>
+        <ion-col>
+          <ion-label> Issue Status</ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="12" style="display: inherit;">
+          <ion-item lines="none" class="checkbox-Item">
+            <ion-checkbox slot="start" class="checkbox-new" [checked]="checkedNew"
+              (ionChange)="onChange('New', checkedNew)"></ion-checkbox>
+            <ion-label class="checkbox-label">New</ion-label>
+          </ion-item>
+
+          <ion-item lines="none" class="checkbox-labelItem">
+            <ion-checkbox slot="start" class="checkbox-pending" [checked]="checkedPending"
+              (ionChange)="onChange('Pending',checkedPending)"></ion-checkbox>
+            <ion-label class="checkbox-label">Pending</ion-label>
+          </ion-item>
+
+          <ion-item lines="none" class="checkbox-labelItem">
+            <ion-checkbox slot="start" class="checkbox-completed" [checked]="checkedCompleted"
+              (ionChange)="onChange('Completed',checkedCompleted)"></ion-checkbox>
+            <ion-label class="checkbox-label">Completed</ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-grid class="staus-card-grid">
+        <ion-row class="ion-justify-content-around">
+
+          <!-- issue card for New -->
+          <ion-col size="5" *ngFor="let data of dataStatus" [ngClass]="{'statusCard-new': data.status == 'New',
+              'statusCard-pending': data.status == 'Pending',
+              'statusCard-completed': data.status == 'Completed'}">
+            <div [ngClass]="{'corner-lightShadow-new':data.status == 'New',
+
+                  'corner-lightShadow-pending':data.status =='Pending',
+
+                  'corner-lightShadow-completed':data.status == 'Completed'
+                  }">
+                                <div [ngClass]="{'corner-darkShadow-new':data.status == 'New',
+                  'corner-darkShadow-pending':data.status == 'Pending',
+                  'corner-darkShadow-completed':data.status == 'Completed'
+                  }"></div>
+                              </div>
+
+            <ion-row>
+              <ion-col size="12" style="line-height: 1;">
+                <ion-note class="status-label-note">Property Name</ion-note><br />
+                <ion-label class="status-label">{{data.propertybuildingname}}</ion-label>
+              </ion-col>
+
+              <ion-col size="12" style="line-height: 1;">
+                <ion-note class="status-label-note">Issue Details</ion-note><br />
+                <ion-label class="status-label">{{data.issuedescription}}</ion-label>
+              </ion-col>
+
+              <ion-col size="12" style="line-height: 1;">
+                <ion-note class="status-label-note">Issue Date</ion-note><br />
+                <ion-label class="status-label">{{data.issuedate}}</ion-label>
+              </ion-col>
+
+              <ion-col size="12" style="line-height: 1;">
+                <ion-note class="status-label-note">Tenent Name</ion-note><br />
+                <ion-label class="status-label">{{data.tenant}}</ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card-content>
+      
+  </ion-card>
+
   <ion-tabs>
 
     <ion-fab vertical="bottom" horizontal="center" translucent="true">
       <ion-fab-button>
-        <ion-icon name="camera"></ion-icon>
+        <ion-icon name="grid"></ion-icon>
       </ion-fab-button>
     </ion-fab>
     <ion-tab-bar slot="bottom" class="ion-no-border">
-      <ion-tab-button (click)="het()">
+      <ion-tab-button>
         <img src="assets/tab_bar/Customer.png" /> Customer
       </ion-tab-button>
 

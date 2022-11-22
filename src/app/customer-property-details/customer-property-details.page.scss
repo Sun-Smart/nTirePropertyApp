@@ -1,0 +1,184 @@
+ion-content,
+ion-toolbar {
+  --background: url("../../assets/loginImages/content-bg.png") no-repeat !important;
+  position: relative;
+}
+
+.header-ios ion-toolbar:last-of-type {
+  --border-width: 0px;
+}
+
+.custom-search {
+  position: relative;
+  width: 300px;
+  padding: 0px !important;
+  margin: 30px !important;
+}
+
+.custom-search-input {
+  width: 96%;
+  border: 1px solid #ccc;
+  border-radius: 100px;
+  padding: 10px 0px 10px 20px;
+  line-height: 1;
+  margin-top: 10px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.selectWrapper {
+  border-radius: 36px;
+  display: inline-block;
+  overflow: hidden;
+  background: #cccccc;
+  border: 1px solid #cccccc;
+}
+
+.selectBox {
+  width: 140px;
+  height: 40px;
+  border: 0px;
+  outline: none;
+}
+
+.custom-search-input-autocomplete {
+  width: 96%;
+  border: 1px solid #ccc;
+  border-radius: 100px;
+  line-height: 1;
+  box-sizing: border-box;
+  background-color: #fff !important;
+  outline: none;
+  height: 45px;
+  margin: 4px;
+  // margin-top: 40px !important;
+}
+
+.searchbar-input.sc-ion-searchbar-ios {
+  background-color: #fff !important;
+}
+.searchbar-input-container.sc-ion-searchbar-ios{
+  width: 285px;
+}
+ion-tabs {
+  ion-fab {
+    margin-bottom: env(safe-area-inset-bottom);
+
+    /* fix notch ios*/
+    ion-fab-button {
+      --box-shadow: none;
+    }
+  }
+
+  ion-tab-bar {
+    --border: 0;
+    --background: transparent;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 70px;
+    width: 100%;
+
+    &:after {
+      content: " ";
+      width: 100%;
+      bottom: 0;
+      background: var(--ion-color-light);
+      height: env(safe-area-inset-bottom);
+      position: absolute;
+    }
+
+    ion-tab-button {
+      --background: var(--ion-color-light);
+    }
+
+    ion-tab-button.comments {
+      margin-right: 0px;
+      border-top-right-radius: 18px;
+    }
+
+    ion-tab-button.notifs {
+      margin-left: 0px;
+      border-top-left-radius: 18px;
+    }
+
+    svg {
+      width: 72px;
+      // margin-top: 19px;
+      margin-top: 25px;
+
+      path {
+        fill: var(--ion-color-light);
+      }
+    }
+  }
+}
+.labelData-text{
+  color: #5448cb;font-size: 14px;font-weight: bold;
+}
+.labelHead-text{
+  font-size: 14px;
+}
+ion-badge {
+  ion-text {
+    margin-left: 3px;
+    margin-right: 3px;
+  }
+  ion-button {
+    height: 20px;
+  }
+}
+.custom-search-botton {
+  position: absolute;
+  right: 21px;
+    top: 77px;
+    bottom: 3px;
+    height: 30px;
+  border: 0;
+  background: #d1095e;
+  color: #fff;
+  outline: none;
+  margin: 0;
+  padding: 0 10px;
+  border-radius: 100px;
+  z-index: 2;
+}
+.common_height{
+
+}
+ion-tabs{
+  height: 0px !important;
+  top: auto;
+  z-index: 1;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 120px;
+  border-radius: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #5246cc;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;border-radius: 10px;}
+
+.dropdown:hover .dropdown-content {position: absolute;
+  display: block;
+  right: 30%;}
+
+// .dropdown:hover .dropbtn {background-color: #3e8e41;}

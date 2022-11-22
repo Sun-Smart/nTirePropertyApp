@@ -3,108 +3,114 @@
 //     // position: relative;
 // }
 body {
-    margin: 0;
+  margin: 0;
 }
 
 .login-bg {
-    position: relative;
-    overflow: hidden;
-    height: 70%;
+  position: relative;
+  overflow: hidden;
+  height: 70%;
 }
 
 .login-bg::before {
-    border-radius: 100%;
-    position: absolute;
-    background: linear-gradient(#4d40D0, #1607bf);
-    right: -200px;
-    left: -200px;
-    top: -200px;
-    content: "";
-    bottom: 0;
+  border-radius: 100%;
+  position: absolute;
+  background: linear-gradient(#4d40D0, #1607bf);
+  right: -200px;
+  left: -200px;
+  top: -200px;
+  content: "";
+  bottom: 0;
 }
 
 .login-content {
-    z-index: 0;
-    position: absolute;
-    top: 0;
+  z-index: 0;
+  position: absolute;
+  top: 0;
 }
 
 .login-dark-bg1 {
-    height: 215px;
-    width: 280px;
-    background-color: #1e0fc1;
-    z-index: 0;
-    position: absolute;
-    top: -32px;
-    right: -72px;
-    border-radius: 50%;
+  height: 215px;
+  width: 280px;
+  background-color: #1e0fc1;
+  z-index: 0;
+  position: absolute;
+  top: -32px;
+  right: -72px;
+  border-radius: 50%;
 }
 
 .login-dark-bg2 {
-    height: 215px;
-    width: 350px;
-    background-color: #1e0fc1;
-    z-index: 0;
-    position: absolute;
-    bottom: 45px;
-    left: -32px;
-    border-radius: 50%;
+  height: 215px;
+  width: 350px;
+  background-color: #1e0fc1;
+  z-index: 0;
+  position: absolute;
+  bottom: 45px;
+  left: -32px;
+  border-radius: 50%;
 }
 
-.login-header-label{
-    color: yellow;
-    font-size: 30px;
+.login-header-label {
+  color: yellow;
+  font-size: 30px;
 }
 
-.login-label{
-    color: #1607bf;
-    font-size: 18px;
-    font-weight: 900;
-    font-family: 'poppins';
+.login-label {
+  color: #1607bf;
+  font-size: 18px;
+  font-weight: 900;
+  font-family: 'poppins';
 }
-.login-label-frgt{
-    color: #1607bf;
-    font-size: 16px;
-    font-weight: 900;
-    font-family: 'poppins';
-    text-align: end;
+
+.login-label-frgt {
+  color: #1607bf;
+  font-size: 16px;
+  font-weight: 900;
+  font-family: 'poppins';
+  text-align: end;
 }
+
 :root {
-    --ion-color-favorite: #1607bf;
-    --ion-color-favorite-rgb: 0, 102, 0;
-    --ion-color-favorite-contrast: #ffffff;
-    --ion-color-favorite-contrast-rgb: 255, 255, 255;
-    --ion-color-favorite-shade: #1607bf;
-    --ion-color-favorite-tint: #1607bf;
-  }
+  --ion-color-favorite: #1607bf;
+  --ion-color-favorite-rgb: 0, 102, 0;
+  --ion-color-favorite-contrast: #ffffff;
+  --ion-color-favorite-contrast-rgb: 255, 255, 255;
+  --ion-color-favorite-shade: #1607bf;
+  --ion-color-favorite-tint: #1607bf;
+}
 
 .ion-color-favorite {
-    --ion-color-base: var(--ion-color-favorite, #1607bf) !important;
-    --ion-color-base-rgb: var(--ion-color-favorite-rgb) !important;
-    --ion-color-contrast: var(--ion-color-favorite-contrast) !important;
-    --ion-color-contrast-rgb: var(--ion-color-favorite-contrast-rgb) !important;
-    --ion-color-shade: var(--ion-color-favorite-shade) !important;
-    --ion-color-tint: var(--ion-color-favorite-tint) !important;
-    font-weight: 900;
-    font-size: 18px;
-    // width: 80%;
-  };
+  --ion-color-base: var(--ion-color-favorite, #1607bf) !important;
+  --ion-color-base-rgb: var(--ion-color-favorite-rgb) !important;
+  --ion-color-contrast: var(--ion-color-favorite-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-favorite-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-favorite-shade) !important;
+  --ion-color-tint: var(--ion-color-favorite-tint) !important;
+  font-weight: 900;
+  font-size: 18px;
+  // width: 80%;
+}
 
-  .loginfooter{
-    display: block;
-    position: absolute;
-    -ms-flex-order: 1;
-    order: 1;
-    width: 100%;
-    z-index: 10;
-    bottom: 0;
-    font-size: 12px;
-    background-color: #cccfef;
-    color: white !important;
-  }
-  ion-item {
-    --highlight-height: 2px;
-    --highlight-color-focused: #1607bf;
-    --highlight-color-valid: #3af058;
-    --highlight-color-invalid: #1607bf;
-  }
+;
+
+.loginfooter {
+  display: block;
+  position: absolute;
+  -ms-flex-order: 1;
+  order: 1;
+  width: 100%;
+  z-index: 10;
+  bottom: 0;
+  font-size: 12px;
+  background-color: #cccfef;
+  color: white !important;
+}
+
+ion-item {
+  --highlight-height: 2px;
+  --highlight-color-focused: #1607bf;
+  --highlight-color-valid: #3af058;
+  --highlight-color-invalid: #1607bf;
+}
+

@@ -7,8 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./customer-side-nav-bar.page.scss'],
 })
 export class CustomerSideNavBarPage implements OnInit {
+  username: string | null;
 
-  constructor(private router:Router) { }
+  constructor(private router:Router) {
+    this.username = localStorage.getItem('TUM_USER_NAME');
+   }
 
   ngOnInit() {
   };

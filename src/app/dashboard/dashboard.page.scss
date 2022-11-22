@@ -1,116 +1,322 @@
 ion-content,
 ion-toolbar {
-    --background: url("../../assets/loginImages/content-bg.png") no-repeat !important;
-    position: relative;
+  --background: url("../../assets/loginImages/content-bg.png") no-repeat !important;
+  position: relative;
 }
 
 .header-ios ion-toolbar:last-of-type {
-    --border-width: 0px;
+  --border-width: 0px;
 }
+
 .header-img {
-    max-width: 12%;
-    border-radius: 50%;
+  max-width: 12%;
+  border-radius: 50%;
 }
+
 .dashHdr-col {
-    display: flex;
-    justify-content: end;
+  display: flex;
+  justify-content: end;
 }
+
 .dashHdr-col {
-    ion-label {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 8px;
-    }
-}
-.col-dash {
+  ion-label {
     display: flex;
-    justify-content: left;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+  }
 }
+
 .col-dash {
-    ion-label {
-        font-weight: bolder;
-    }
+  display: flex;
+  justify-content: left;
 }
+
+.col-dash {
+  ion-label {
+    font-weight: bolder;
+  }
+}
+
 .chart-tab {
-    background: linear-gradient(to left, #b9b5db, #e5e5f8);
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
+  background: linear-gradient(to left, #b9b5db, #e5e5f8);
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
 }
+
 .dash-chartMenu {
-    ion-col {
-        display: flex;
-        justify-content: center;
-        z-index: 1;
-    }
+  ion-col {
+    display: flex;
+    justify-content: center;
+    z-index: 1;
+  }
 }
+
 .dash-chartLabel-Menu {
-    ion-col {
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        font-size: 11px;
-    }
+  ion-col {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+  }
 }
- ion-card{
-    height: 350px;
- }
+
+// ion-card {
+//   height: 350px;
+// }
 
 .header-ios ion-toolbar:last-of-type {
-    --border-width: 0 0 0px !important;
+  --border-width: 0 0 0px !important;
 }
+
 ion-tabs {
-    ion-fab {
-        margin-bottom: env(safe-area-inset-bottom);
+  ion-fab {
+    margin-bottom: env(safe-area-inset-bottom);
 
-        /* fix notch ios*/
-        ion-fab-button {
-            --box-shadow: none;
-        }
+    /* fix notch ios*/
+    ion-fab-button {
+      --box-shadow: none;
+    }
+  }
+
+  ion-tab-bar {
+    --border: 0;
+    --background: transparent;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 70px;
+    width: 100%;
+
+    &:after {
+      content: " ";
+      width: 100%;
+      bottom: 0;
+      background: var(--ion-color-light);
+      height: env(safe-area-inset-bottom);
+      position: absolute;
     }
 
-    ion-tab-bar {
-        --border: 0;
-        --background: transparent;
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        right: 0;
-        height: 70px;
-        width: 100%;
-
-        &:after {
-            content: " ";
-            width: 100%;
-            bottom: 0;
-            background: var(--ion-color-light);
-            height: env(safe-area-inset-bottom);
-            position: absolute;
-        }
-
-        ion-tab-button {
-            --background: var(--ion-color-light);
-        }
-
-        ion-tab-button.comments {
-            margin-right: 0px;
-            border-top-right-radius: 18px;
-        }
-
-        ion-tab-button.notifs {
-            margin-left: 0px;
-            border-top-left-radius: 18px;
-        }
-
-        svg {
-            width: 72px;
-            // margin-top: 19px;
-            margin-top: 25px;
-
-            path {
-                fill: var(--ion-color-light);
-            }
-        }
+    ion-tab-button {
+      --background: var(--ion-color-light);
     }
+
+    ion-tab-button.comments {
+      margin-right: 0px;
+      border-top-right-radius: 18px;
+    }
+
+    ion-tab-button.notifs {
+      margin-left: 0px;
+      border-top-left-radius: 18px;
+    }
+
+    svg {
+      width: 72px;
+      // margin-top: 19px;
+      margin-top: 25px;
+
+      path {
+        fill: var(--ion-color-light);
+      }
+    }
+  }
+}
+
+#sourcecanvas1 {
+  height: 270px !important;
+  margin-top: 14px !important;
+}
+
+#sourcecanvas3 {
+  height: 270px !important;
+  margin-top: 14px !important;
+}
+
+#sourcecanvas2 {
+  height: 270px !important;
+  margin-top: 14px !important;
+}
+
+ion-checkbox {
+  --size: 17px;
+  margin: 0px 6px 2px 0px !important;
+  // --background-checked: #6815ec;
+}
+
+ion-checkbox::part(container) {
+  border-radius: 4px;
+  // border: 1px solid #6815ec;
+}
+
+.checkbox-labelItem {
+  padding: 0px;
+  width: fit-content;
+}
+
+.checkbox-labelItem {
+  ion-label {
+    font-size: 14px !important;
+  }
+}
+
+.checkbox-labelItem {
+  .checkbox-new {
+    --size: 17px;
+    margin: 0px 6px 2px 0px !important;
+    --background-checked: #6815ec;
+  }
+}
+
+.checkbox-labelItem {
+  .checkbox-pending {
+    --size: 17px;
+    margin: 0px 6px 2px 0px !important;
+    --background-checked: #ec1527;
+  }
+}
+
+.checkbox-labelItem {
+  .checkbox-completed {
+    --size: 17px;
+    margin: 0px 6px 2px 0px !important;
+    --background-checked: #0da721;
+  }
+}
+
+.statusCard-new,
+.statusCard-pending,
+.statusCard-completed {
+  border-radius: 20px;
+  height: fit-content;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.statusCard-new {
+  background-color: #eceafd;
+}
+
+.statusCard-pending {
+  background-color: #f9e7eb;
+}
+
+.statusCard-completed {
+  background-color: #d8ffd6;
+}
+
+.card-content-ios {
+  padding: 0;
+}
+
+.status-label-note {
+  font-size: 11px;
+  color: gray;
+}
+
+.status-label {
+  font-size: 13px;
+  color: #000;
+  font-weight: 600;
+}
+
+//   Issue card for New
+.corner-darkShadow-new {
+
+  width: 30px;
+  height: 15px;
+  background-color: #6815ec;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 14px;
+  z-index: 1;
+}
+
+.corner-lightShadow-new {
+
+  width: 45px;
+  height: 20px;
+  background-color: #c3b3dd;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 14px;
+}
+
+//   Issue card for Completed
+.corner-darkShadow-completed {
+  border-bottom-left-radius: 14px;
+  width: 30px;
+  height: 15px;
+  background-color: #0da721;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-right-radius: 20px;
+  z-index: 1;
+}
+
+.corner-lightShadow-completed {
+  border-bottom-left-radius: 14px;
+  width: 45px;
+  height: 20px;
+  background-color: #b0ebb8;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-right-radius: 20px;
+}
+
+//   Issue card for Pending
+.corner-darkShadow-pending {
+  border-bottom-left-radius: 14px;
+  width: 30px;
+  height: 15px;
+  background-color: #ec1527;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-right-radius: 20px;
+  z-index: 1;
+}
+
+.corner-lightShadow-pending {
+  border-bottom-left-radius: 14px;
+  width: 45px;
+  height: 20px;
+  background-color: #e7d4d5;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-right-radius: 20px;
+}
+
+.scroll-items {
+  justify-content: flex-start; // changed
+  flex-wrap: nowrap;
+  overflow-x: scroll !important;
+  overflow-y: hidden;
+}
+
+.scroll-items ion-col {
+  // added
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+ion-grid {
+  font: -webkit-small-control;
+}
+
+.staus-card-grid {
+  ion-row {
+    overflow: scroll !important;
+    height: 208px;
+  }
 }
