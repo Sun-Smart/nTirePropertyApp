@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 import { IpaddressService } from '../fm-services/ipaddress.service';
 import * as $ from "jquery";
 import { Router } from '@angular/router';
@@ -57,9 +57,13 @@ export class CustomerPropertyDetailsPage implements OnInit {
   getBID_DESC: any;
   branchDesc: any = [];
   getBIDdesc: any;
-
+  locationName: any;
+  propertyBindngName: any;
+  showBranch: boolean = false;
+  showLocation: boolean = false;
+  showProperty: boolean = false;
   constructor(private modalCtrl: ModalController,
-    public alertController: AlertController,
+    public alertController: AlertController, public loadingController: LoadingController,
     private http: HttpClient, private router: Router,
     public Ipaddressservice: IpaddressService) {
     this.branchID = localStorage.getItem('TUM_BRANCH_ID');
@@ -67,12 +71,13 @@ export class CustomerPropertyDetailsPage implements OnInit {
     this.userID = localStorage.getItem('TUM_USER_ID');
     this.usertype = localStorage.getItem('TUM_USER_TYPE');
     this.accessToken = localStorage.getItem('token');
-    this.branch = localStorage.getItem('TUM_BRANCH_CODE');
   }
 
   ngOnInit() {
+    this.presentLoadingWithOptions();
     this.BranchLocationdata();
     this.getcustomerItems();
+    this.loadingdismiss();
   }
   showmore(idvalue) {
     //        alert(idvalue);
@@ -89,6 +94,7 @@ export class CustomerPropertyDetailsPage implements OnInit {
     let userId = localStorage.getItem('TUM_USER_ID');
 
     let options = new HttpHeaders().set('Content-Type', 'application/json');
+    this.presentLoadingWithOptions();
     this.http.get(this.Ipaddressservice.ipaddress1 + this.Ipaddressservice.serviceurlProperty + 'bindbranch/' + strFunctionId + "/" + userId, {
       headers: options,
     }).subscribe(resp => {
@@ -97,10 +103,10 @@ export class CustomerPropertyDetailsPage implements OnInit {
         this.getBID = this.branchlist1[i].BRANCH_ID;
         console.log('getBID', this.getBIDdesc);
       }
-
+      this.loadingdismiss();
 
     }, error => {
-
+      this.loadingdismiss();
       // console.log("branchlist1 : " + JSON.stringify(error));
     });
   };
@@ -108,7 +114,7 @@ export class CustomerPropertyDetailsPage implements OnInit {
   getLocationdata(branch: any) {
     this.branchName = this.branchlist1.filter((x => {
       if (x.BRANCH_ID == branch) {
-        console.log(x);
+        this.showBranch = true;
         return x;
       }
     }))
@@ -122,6 +128,7 @@ export class CustomerPropertyDetailsPage implements OnInit {
     this.get_Bid = branch;
 
     let options = new HttpHeaders().set('Content-Type', 'application/json');
+    this.presentLoadingWithOptions();
     this.http.get(this.Ipaddressservice.ipaddress1 + this.Ipaddressservice.serviceurlProperty + 'getlocation/' + strFunctionId + "/" + branch, {
       headers: options,
     }).subscribe(resp => {
@@ -139,13 +146,21 @@ export class CustomerPropertyDetailsPage implements OnInit {
         this.showBranchField = true;
         this.showPropertyCodeField = false;
       }
-
+      this.loadingdismiss();
     });
   };
 
   newPropertyCode(branchlocation: any) {
 
     this.location = branchlocation;
+
+    this.locationName = this.customerlocation.filter((x => {
+      if (x.LOCATION_ID == branchlocation) {
+        this.showLocation = true;
+        return x;
+      }
+    }))
+    this.locationName = this.locationName[0]
     console.log(this.location);
 
     let data = {
@@ -157,6 +172,7 @@ export class CustomerPropertyDetailsPage implements OnInit {
     header.append("Content-Type", "application/json");
 
     let options = new HttpHeaders().set('Content-Type', 'application/json');
+    this.presentLoadingWithOptions();
     this.http.get(this.Ipaddressservice.ipaddress1 + this.Ipaddressservice.serviceurlProperty + 'getPropertycode/' + data.propertyCode + "/" + data.strFunctionId + "/" + data.branch_Id + "/" + this.location, {
       headers: options,
     }).subscribe(resp => {
@@ -166,9 +182,10 @@ export class CustomerPropertyDetailsPage implements OnInit {
         this.showLocationField = false;
         this.showPropertyCodeField = true;
       }
-
+      this.loadingdismiss();
     }, error => {
       console.log("error : " + JSON.stringify(error));
+      this.loadingdismiss();
     });
 
   };
@@ -203,6 +220,7 @@ export class CustomerPropertyDetailsPage implements OnInit {
         this.showdata = true;
       } else {
         this.showdata = false;
+
         for (var i = 0; i < this.companiesstr.length; i++) {
           this.propertyCode1.push({
             property_code: this.companiesstr[i].property_code,
@@ -218,8 +236,11 @@ export class CustomerPropertyDetailsPage implements OnInit {
       const val = ev.target.value;
 
       if (val && val.trim() != '') {
+
         this.isPropertycodeAvailable = true;
         this.propertyCode1 = this.propertyCode1.filter((item) => {
+          this.showProperty = true;
+          // this.propertyCode1 = [];
           return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
         });
       }
@@ -255,6 +276,7 @@ export class CustomerPropertyDetailsPage implements OnInit {
       console.log(this.respContact);
 
       this.propertyDesc = this.respContact[0]['property_building_name'];
+      this.filterRecords();
     }, error => {
       console.log("error : " + JSON.stringify(error));
     });
@@ -326,49 +348,50 @@ export class CustomerPropertyDetailsPage implements OnInit {
 
   };
   filterRecords() {
-    if (this.branch == "undefined" || this.branch == null || this.branch == "" || this.branch == "Branch") {
-      this.presentAlert1("", "Please select Branch");
-      return;
-    } else {
-      debugger;
-      const header = new Headers();
-      header.append("Content-Type", "application/json");
+    // if (this.branch == "undefined" || this.branch == null || this.branch == "" || this.branch == "Branch") {
+    //   this.presentAlert1("", "Please select Branch");
+    //   return;
+    // } else {
+    //   debugger;
+    // };
+    this.presentLoadingWithOptions();
+    const header = new Headers();
+    header.append("Content-Type", "application/json");
 
-      let data = {
-        functionid: localStorage.getItem('FUNCTION_ID'),
-        branchids: this.get_Bid ? this.get_Bid : 0,
-        locationid: this.location ? this.location : 0,
-        strPropertyCode: this.propertycodeDesc ? this.propertycodeDesc : 0,
-        strPropertyDesc: 0,
-        rentelCode: 0,
-        strStatus: 0,
-        pageIndex: 0,
-        pageSize: 50,
-        sortExpression: 0,
-        alphaname: 0,
-        Split_ID: 0,
-        strusertype: localStorage.getItem('TUM_USER_TYPE'),
-        userid: localStorage.getItem('TUM_USER_ID')
-      };
-
-      let options = new HttpHeaders().set('Content-Type', 'application/json');
-      this.http.get(this.Ipaddressservice.ipaddress + this.Ipaddressservice.serviceurlProperty + 'fm_rental_summary/' + data.functionid + '/' + data.branchids + '/' + data.locationid + '/' + data.strPropertyCode + '/' + data.strPropertyDesc + '/' + data.rentelCode + '/' + data.strStatus + '/' + data.pageIndex + '/' + data.pageSize + '/' + data.sortExpression + '/' + data.alphaname + '/' + data.Split_ID + '/' + data.strusertype + '/' + data.userid, {
-        headers: options,
-      }).subscribe(resp => {
-        ;
-        this.propertyCodeResult = resp;
-        console.log(this.propertyCodeResult);
-
-        if (this.propertyCodeResult == null) {
-          this.propertyCodeResult = []
-          this.showdata = true;
-        } else {
-          this.showdata = false;
-          this.propertyCodeResult = resp;
-        }
-      });
-
+    let data = {
+      functionid: localStorage.getItem('FUNCTION_ID'),
+      branchids: this.get_Bid ? this.get_Bid : 0,
+      locationid: this.location ? this.location : 0,
+      strPropertyCode: this.propertycodeDesc ? this.propertycodeDesc : 0,
+      strPropertyDesc: 0,
+      rentelCode: 0,
+      strStatus: 0,
+      pageIndex: 0,
+      pageSize: 50,
+      sortExpression: 0,
+      alphaname: 0,
+      Split_ID: 0,
+      strusertype: localStorage.getItem('TUM_USER_TYPE'),
+      userid: localStorage.getItem('TUM_USER_ID')
     };
+
+    let options = new HttpHeaders().set('Content-Type', 'application/json');
+    this.http.get(this.Ipaddressservice.ipaddress + this.Ipaddressservice.serviceurlProperty + 'fm_rental_summary/' + data.functionid + '/' + data.branchids + '/' + data.locationid + '/' + data.strPropertyCode + '/' + data.strPropertyDesc + '/' + data.rentelCode + '/' + data.strStatus + '/' + data.pageIndex + '/' + data.pageSize + '/' + data.sortExpression + '/' + data.alphaname + '/' + data.Split_ID + '/' + data.strusertype + '/' + data.userid, {
+      headers: options,
+    }).subscribe(resp => {
+      ;
+      this.propertyCodeResult = resp;
+      console.log(this.propertyCodeResult);
+
+      if (this.propertyCodeResult == null) {
+        this.propertyCodeResult = []
+        this.showdata = true;
+      } else {
+        this.showdata = false;
+        this.propertyCodeResult = resp;
+      }
+      this.loadingdismiss();
+    });
 
   };
   showPopup() {
@@ -376,5 +399,63 @@ export class CustomerPropertyDetailsPage implements OnInit {
   }
   gotoDashboard() {
     this.router.navigate(['/dashboard']);
+  }
+  gotoCustomer() {
+    this.router.navigate(['customer-property-details']);
+  }
+  gotoAdditional() {
+    this.router.navigate(['fm-additional-page']);
+  }
+  async presentLoadingWithOptions() {
+    const loading = await this.loadingController.create({
+      spinner: 'lines-sharp',
+      duration: 3000,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading',
+
+    });
+    return await loading.present();
+  };
+
+  async loadingdismiss() {
+
+    return await this.loadingController.dismiss();
+  };
+  clearBranch() {
+    this.ngOnInit();
+    this.showBranch = false;
+    this.showLocation = false;
+    this.showProperty = false;
+    this.branchlist1 = [];
+    this.customerlocation = [];
+    this.propertyCode1 = [];
+    this.ngOnInit();
+    this.showBranchField = true;
+    this.showLocationField = false;
+    this.showPropertyCodeField = false;
+
+  }
+  clearLocation() {
+    this.ngOnInit();
+    this.showLocation = false;
+    this.showProperty = false;
+    this.customerlocation = [];
+    this.propertyCode1 = [];
+    this.ngOnInit();
+    this.showBranchField = true;
+    this.showLocationField = false;
+    this.showPropertyCodeField = false;
+  }
+  clearProperty() {
+    this.ngOnInit();
+    this.showProperty = false;
+    this.propertyCode1 = [];
+    this.propertycode = "";
+    this.ngOnInit();
+    this.showBranchField = false;
+    this.showLocationField = false;
+    this.showPropertyCodeField = true;
+
   }
 }

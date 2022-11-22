@@ -1,12 +1,141 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button style="color: #fff;"></ion-menu-button>
     </ion-buttons>
-    <ion-title>fm-paymentDetails</ion-title>
+    <ion-title class="header">Payment Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card *ngFor="let items of getPaymentDetailsList; let i = index">
+    <ion-card-header class="card_header">
+      <ion-row>
+        <ion-col size="4">
+          <ion-label class="card_header_text"> #{{i+1}}</ion-label>
+        </ion-col>
+        <ion-col size="7">
+          <ion-label class="card_header_text">Payments Details</ion-label>
+        </ion-col>
 
+      </ion-row>
+    </ion-card-header>
+
+    <ion-card-content class="card_content">
+
+      <ion-row>
+        <ion-col size="5" class="col_height">
+          <ion-label class="labelHead-text"> Branch </ion-label>
+        </ion-col>
+        <ion-col size="1"> : </ion-col>
+        <ion-col size="6" class="col_height">
+          <ion-label class="labelData-text">{{items.Branch}}</ion-label>
+        </ion-col>
+
+        <ion-col size="5" class="col_height">
+          <ion-label class="labelHead-text">Location </ion-label>
+        </ion-col>
+        <ion-col size="1"> : </ion-col>
+        <ion-col size="6" class="col_height">
+          <ion-label class="labelData-text"> {{items.Location}}</ion-label>
+        </ion-col>
+
+        <ion-col size="5" class="col_height">
+          <ion-label class="labelHead-text">Property code </ion-label>
+        </ion-col>
+        <ion-col size="1"> : </ion-col>
+        <ion-col size="6" class="col_height">
+          <ion-label class="labelData-text"> {{items.Propertycode}}</ion-label>
+        </ion-col>
+
+        <ion-col size="5" class="col_height">
+          <ion-label class="labelHead-text">customer </ion-label>
+        </ion-col>
+        <ion-col size="1"> : </ion-col>
+        <ion-col size="6" class="col_height">
+          <ion-label class="labelData-text">{{items.Customer}}</ion-label>
+        </ion-col>
+
+        <ion-col size="5" class="col_height">
+          <ion-label class="labelHead-text">Description </ion-label>
+        </ion-col>
+        <ion-col size="1"> : </ion-col>
+        <ion-col size="6" class="col_height">
+          <ion-label class="labelData-text">{{items.Description}}</ion-label>
+        </ion-col>
+
+        <ion-col size="5" class="col_height">
+          <ion-label class="labelHead-text">currency</ion-label>
+        </ion-col>
+        <ion-col size="1"> : </ion-col>
+        <ion-col size="6" class="col_height">
+          <ion-label class="labelData-text">{{items.Currency}}</ion-label>
+        </ion-col>
+        <ion-col size-sm="6" size="12" size-md="6" size-lg="6" size-xl="6" class="col-card-arrow">
+          <a (click)="showmore(i)">
+            <img id="imageidvalsp{{0+i}}" src="../../assets/images/Down arrow.png">
+          </a>
+        </ion-col>
+      </ion-row>
+
+      <div id="dividvalsp{{0+i}}" style="display:none;">
+        <ion-row>
+          <ion-col size="5" class="col_height">
+            <ion-label class="labelHead-text">Amount </ion-label>
+          </ion-col>
+          <ion-col size="1"> : </ion-col>
+          <ion-col size="6" class="col_height">
+            <ion-label class="labelData-text"> {{items.Amount}}</ion-label>
+          </ion-col>
+
+          <ion-col size="5" class="col_height">
+            <ion-label class="labelHead-text"> Paymode </ion-label>
+          </ion-col>
+          <ion-col size="1"> : </ion-col>
+          <ion-col size="6" class="col_height">
+            <ion-label class="labelData-text"> {{items.PayMode}}</ion-label>
+          </ion-col>
+
+          <ion-col size="5" class="col_height">
+            <ion-label class="labelHead-text"> Bank </ion-label>
+          </ion-col>
+          <ion-col size="1"> : </ion-col>
+          <ion-col size="6" class="col_height">
+            <ion-label class="labelData-text"> {{items.Bank}}</ion-label>
+          </ion-col>
+
+          <ion-col size="5" class="col_height">
+            <ion-label class="labelHead-text"> Reference </ion-label>
+          </ion-col>
+          <ion-col size="1"> : </ion-col>
+          <ion-col size="6" class="col_height">
+            <ion-label class="labelData-text"> {{items.Reference}}</ion-label>
+          </ion-col>
+
+          <ion-col size="5" class="col_height">
+            <ion-label class="labelHead-text"> Cheque Date </ion-label>
+          </ion-col>
+          <ion-col size="1"> : </ion-col>
+          <ion-col size="6" class="col_height">
+            <ion-label class="labelData-text"> {{items.ChequeDate}}</ion-label>
+          </ion-col>
+
+          <ion-col size="5" class="col_height">
+            <ion-label class="labelHead-text"> Status </ion-label>
+          </ion-col>
+          <ion-col size="1"> : </ion-col>
+          <ion-col size="6" class="col_height">
+            <ion-label class="labelData-text"> {{items.Status}}</ion-label>
+          </ion-col>
+
+          <ion-col size-sm="6" size="12" size-md="6" size-lg="6" size-xl="4" class="col-card-arrow">
+            <a (click)="showless(i)">
+              <img src="../../assets/images/Top Arrow.png">
+            </a>
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-card-content>
+
+  </ion-card>
 </ion-content>

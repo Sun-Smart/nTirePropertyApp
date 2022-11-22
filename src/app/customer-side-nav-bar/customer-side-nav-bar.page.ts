@@ -26,7 +26,7 @@ export class CustomerSideNavBarPage implements OnInit {
     this.router.navigate(['/fm-my-task']);
   };
   additionalCharges(){
-    this.router.navigate(['/fm-additional-page']);
+    this.router.navigate(['fm-additional-page']);
   };
   quickReciept(){
     this.router.navigate(['/fm-quick-receipt']);

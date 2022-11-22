@@ -62,6 +62,14 @@ const routes: Routes = [
   {
     path: 'fm-propety-contact-list',
     loadChildren: () => import('./fm-propety-contact-list/fm-propety-contact-list.module').then( m => m.FmPropetyContactListPageModule)
+  },
+  {
+    path: 'additionallist',
+    loadChildren: () => import('./additionallist/additionallist.module').then( m => m.AdditionallistPageModule)
+  },
+  {
+    path: 'additionallist/:property',
+    loadChildren: () => import('./additionallist/additionallist.module').then( m => m.AdditionallistPageModule)
   }
 ];
 

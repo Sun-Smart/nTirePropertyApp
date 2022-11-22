@@ -1,12 +1,305 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+      <ion-menu-button style="color: #fff;"></ion-menu-button>
     </ion-buttons>
-    <ion-title>fm-additionalPage</ion-title>
+    <ion-title class="header">Additional Page</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-content style="max-height: 630px !important;">
+    <ion-grid>
+      <ion-row>
+        <ion-col style="text-align: end;">
+          <ion-badge style="padding: 10px;height: 31px;width: fit-content;background-color: #d08b15;" *ngIf="showBranch">
+            <ion-text class="font-10"><b>{{branchName?.BRANCH_DESC}}</b></ion-text>
+            <ion-icon name="close-circle" style="font-size: 24px;float: right;position: relative;left:4px;top: -57%;" (click)="clearBranch()">
+            </ion-icon>
+          </ion-badge>
+        </ion-col>
+        <ion-col>
+          <ion-badge style="padding: 10px;height: 31px;width: fit-content;background-color: #d08b15;"
+            *ngIf="showLocation">
+            <ion-text class="font-10"><b>{{locationName?.LOCATION_DESC}}</b></ion-text>
+            <ion-icon name="close-circle" style="font-size: 24px;float: right;position: relative;left:4px;top: -57%;" (click)="clearLocation()">
+            </ion-icon>
+          </ion-badge>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-badge style="padding: 10px;height: 31px;width: fit-content;background-color: #d08b15;" *ngIf="showProperty">
+            <ion-text class="font-10"><b>{{propertyDesc}}</b></ion-text>
+            <ion-icon name="close-circle" style="font-size: 24px;float: right;position: relative;left:4px;top: -57%;" (click)="clearProperty()">
+            </ion-icon>
+          </ion-badge>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-col size="6" style="z-index: 1;" *ngIf="showBranchField">
+      <select id="selectbutton" [(ngModel)]="branch" class="custom-search-input" (change)="getLocationdata(branch)">
+        <option [ngValue]="undefined" selected disabled>
+          Select Branch
+        </option>
+        <option *ngFor="let branch of branchlist1; let i = index" [ngValue]="branch.BRANCH_ID">
+          {{branch.BRANCH_DESC}}
+        </option>
 
+      </select>
+    </ion-col>
+
+    <ion-col size="6" style="z-index: 1;" *ngIf="showLocationField">
+      <select id="selectbutton" [(ngModel)]="branchlocation" (change)="newPropertyCode(branchlocation)"
+        class="custom-search-input">
+        <option [ngValue]="undefined" selected disabled>
+          Select Location
+        </option>
+        <option *ngFor="let location of customerlocation; let i = index" [ngValue]="location.LOCATION_ID">
+          {{location.LOCATION_DESC}}
+        </option>
+      </select>
+    </ion-col>
+    <div size="12" style="z-index: 1;" *ngIf="showPropertyCodeField">
+      <ion-searchbar [(ngModel)]="propertycode" Enter Property Code type="text" debounce="500"
+        class="custom-search-input-autocomplete" (ionInput)="getPropertyCode($event)">
+      </ion-searchbar>
+
+      <ion-list *ngIf="isPropertycodeAvailable" class="searchlist" style="height: auto;">
+        <ion-item *ngFor="let item of propertyCode1" (click)="addPropertycode(item)"
+          style="background:none !important;color:#444 !important;display: block;">
+          {{item.binding}}
+        </ion-item>
+        <ion-item *ngIf="showdata">
+          No Data found..
+        </ion-item>
+      </ion-list>
+      <!-- <button class="custom-search-botton" type="submit" (click)="filterRecords()">Filter</button> -->
+    </div>
+    <center *ngIf="!showdata"
+      style="text-align: center;font-weight: bold;font-size: 17px;margin-top: 5px;color: #000 !important;">
+      Total records: {{ShowAddionalList.length}}</center>
+
+    <center *ngIf="showdata"
+      style="text-align: center;font-weight: bold;margin-top: 5px;font-size: 17px;color: #000 !important;">
+      No records found</center>
+    <ion-scroll scrollY="true">
+      <ion-card style="z-index: 1;margin-top: 10px;" *ngFor="let items of ShowAddionalList;let i = index;">
+        <ion-card-header class="card_header">
+          <ion-row>
+            <ion-col>
+              <center><b style="float: left;">Property Details</b><b>
+                  <div class="dropdown" style="float: right;">
+                    <button class="dropbtn" style="background: none;">
+                      <ion-icon style="float: right;font-size: x-large;color: #fff;" name="ellipsis-vertical-circle">
+                      </ion-icon>
+                    </button>
+                    <div class="dropdown-content">
+                      <a href="javascript:void(0);" (click)="viewReciept(items)">View Details</a>
+                    </div>
+                  </div>
+                </b></center>
+            </ion-col>
+          </ion-row>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-row>
+            <ion-col size="5" class="col_height">
+              <ion-label class="labelHead-text">Branch</ion-label>
+            </ion-col>
+            <ion-col size="1">:</ion-col>
+            <ion-col size="6" class="col_height">
+              <ion-label class="labelData-text">{{items.BRANCH_DESC}}
+              </ion-label>
+            </ion-col>
+
+            <ion-col size="5" class="col_height">
+              <ion-label class="labelHead-text">Location</ion-label>
+            </ion-col>
+            <ion-col size="1">:</ion-col>
+            <ion-col size="6" class="col_height">
+              <ion-label class="labelData-text">{{items.LOCATION_DESC}}
+              </ion-label>
+            </ion-col>
+
+
+            <ion-col size="5" class="col_height">
+              <ion-label class="labelHead-text">Property Code </ion-label>
+            </ion-col>
+            <ion-col size="1">:</ion-col>
+            <ion-col size="6" class="col_height">
+              <ion-label class="labelData-text">{{items.PROPERTY_CODE}}
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="col_height">
+              <ion-label class="labelHead-text">Description</ion-label>
+            </ion-col>
+            <ion-col size="1">:</ion-col>
+            <ion-col size="6" class="col_height">
+              <ion-label class="labelData-text">{{items.PROPERTY_DESC}}
+              </ion-label>
+            </ion-col>
+            <ion-col size="5" class="col_height">
+              <ion-label class="labelHead-text"> Rental Code </ion-label>
+            </ion-col>
+            <ion-col size="1">:</ion-col>
+            <ion-col size="6" class="col_height">
+              <ion-label class="labelData-text">{{items.RENTAL_CODE}}
+              </ion-label>
+            </ion-col>
+            <!-- <ion-col size-sm="6" size="6" size-md="6" size-lg="6" size-xl="6"></ion-col>
+            <ion-col size-sm="6" size="6" size-md="6" size-lg="6" size-xl="6">
+              <a (click)="showmore(i)">
+                <ion-icon id="imageidvalsp{{0+i}}" name="caret-down-circle"
+                  style="font-size: 21px;background: #607d8b;color: white;border-radius: 50%;width: 26px;height: 26px;text-align: center;position: relative;bottom: 12px;box-shadow: 0 2px 8px 0 rgba(0,0,0,0.3), 0 4px 20px 0 rgba(0,0,0,0.3);">
+                </ion-icon>
+              </a>
+            </ion-col>
+            <div id="dividvalsp{{0+i}}" style="display:none;">
+              <ion-row>
+
+                <ion-col size="5" class="col_height">
+                  <ion-label class="labelHead-text">Property Type </ion-label>
+                </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6" class="col_height">
+                  <ion-label class="labelData-text">{{items.Category}}
+                  </ion-label>
+                </ion-col>
+
+                <ion-col size="5" class="col_height">
+                  <ion-label class="labelHead-text">Total Floors</ion-label>
+                </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6" class="col_height">
+                  <ion-label class="labelData-text">{{items.total_floors}}
+                  </ion-label>
+                </ion-col>
+
+                <ion-col size="5" class="col_height">
+                  <ion-label class="labelHead-text">Property On Floors </ion-label>
+                </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6" class="col_height">
+                  <ion-label class="labelData-text">{{items.property_floor}}
+                  </ion-label>
+                </ion-col>
+
+                <ion-col size="5" class="col_height">
+                  <ion-label class="labelHead-text">Corporate Area (Sq.ft) </ion-label>
+                </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6" class="col_height">
+                  <ion-label class="labelData-text">{{items.superbuildup_area}}
+                  </ion-label>
+                </ion-col>
+
+                <ion-col size="5" class="col_height">
+                  <ion-label class="labelHead-text">Responsible Person </ion-label>
+                </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6" class="col_height">
+                  <ion-label class="labelData-text">{{items.Incharge}}
+                  </ion-label>
+                </ion-col>
+
+                <ion-col size="5" class="col_height">
+                  <ion-label class="labelHead-text">Customer Name </ion-label>
+                </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6" class="col_height">
+                  <ion-label class="labelData-text">{{items.CustomerName}}
+                  </ion-label>
+                </ion-col>
+
+                <ion-col size="5" class="col_height">
+                  <ion-label class="labelHead-text">Agreement Start Date</ion-label>
+                </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6" class="col_height">
+                  <ion-label class="labelData-text">{{items.start_date}}
+                  </ion-label>
+                </ion-col>
+
+                <ion-col size="5" class="col_height">
+                  <ion-label class="labelHead-text">Agreement End Date </ion-label>
+                </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6" class="col_height">
+                  <ion-label class="labelData-text">{{items.end_date}}
+                  </ion-label>
+                </ion-col>
+
+                <ion-col size="5" class="col_height">
+                  <ion-label class="labelHead-text">Property Status </ion-label>
+                </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6" class="col_height">
+                  <ion-label class="labelData-text">{{items.status}}
+                  </ion-label>
+                </ion-col>
+
+                <ion-col size="5" class="col_height">
+                  <ion-label class="labelHead-text">Rent Type </ion-label>
+                </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6" class="col_height">
+                  <ion-label class="labelData-text">{{items.rent_type}}
+                  </ion-label>
+                </ion-col>
+                <ion-col size="5" class="col_height">
+                  <ion-label class="labelHead-text">Rent Amount </ion-label>
+                </ion-col>
+                <ion-col size="1">:</ion-col>
+                <ion-col size="6" class="col_height">
+                  <ion-label class="labelData-text">{{items.Rentamount}}
+                  </ion-label>
+                </ion-col>
+                <ion-col size-sm="6" size="6" size-md="6" size-lg="6" size-xl="6"></ion-col>
+                <ion-col size-sm="6" size="6" size-md="6" size-lg="6" size-xl="4">
+                  <a (click)="showless(i)">
+                    <ion-icon name="caret-up-circle"
+                      style="font-size: 21px;background: #607d8b;color: white;border-radius: 50%;width: 26px;height: 26px;text-align: center;position: relative;bottom: 12px;box-shadow: 0 2px 8px 0 rgba(0,0,0,0.3), 0 4px 20px 0 rgba(0,0,0,0.3);">
+                    </ion-icon>
+                  </a>
+                </ion-col>
+              </ion-row>
+            </div> -->
+          </ion-row>
+        </ion-card-content>
+
+      </ion-card>
+    </ion-scroll>
+
+  </ion-content>
+  <ion-tabs style="position: fixed !important;">
+
+    <ion-fab vertical="bottom" horizontal="center" translucent="true">
+      <ion-fab-button (click)="gotoDashboard()">
+        <ion-icon name="grid"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-tab-bar slot="bottom" class="ion-no-border">
+      <ion-tab-button (click)="gotoCustomer()">
+        <img src="assets/tab_bar/Customer.png" /> Customer
+      </ion-tab-button>
+
+      <ion-tab-button class="comments">
+        <img src="assets/tab_bar/My_Task.png" />
+        My Task
+      </ion-tab-button>
+      <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd">
+        </path>
+      </svg>
+      <ion-tab-button class="notifs" (click)="gotoAdditional()">
+        <img src="assets/tab_bar/Aditional_charge.png" /> Additional
+      </ion-tab-button>
+      <ion-tab-button>
+        <img src="assets/tab_bar/Transaction.png" />
+        Transaction
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>

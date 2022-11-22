@@ -4,6 +4,7 @@ import { Chart } from 'chart.js';
 import { InfiniteScrollCustomEvent, Platform } from '@ionic/angular';
 import { ViewEncapsulation } from '@angular/core';
 import { IpaddressService } from '../fm-services/ipaddress.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -72,7 +73,7 @@ export class DashboardPage implements OnInit {
   checkedCompleted : boolean = false;
   dataStatus1: any=[];
   constructor(private http: HttpClient,
-    private platform: Platform,
+    private platform: Platform,private router: Router,
     public Ipaddressservice: IpaddressService,) {
 
     this.username = localStorage.getItem('TUM_USER_NAME');
@@ -570,5 +571,11 @@ export class DashboardPage implements OnInit {
      })
     }
 
+  }
+  gotoCustomer() {
+    this.router.navigate(['customer-property-details']);
+  }
+  gotoAdditional() {
+    this.router.navigate(['fm-additional-page']);
   }
 }

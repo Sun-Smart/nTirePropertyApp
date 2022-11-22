@@ -75,6 +75,32 @@ ion-card {
       background-image: linear-gradient(90deg, #4d40d0, #716abb) !important;
       color: white !important;
       text-align: initial;
-      padding: 10px; 
+      padding: 10px;
     }
+  }
+  .col-card-arrow {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 30px;
+  }
+  .labelData-text {
+    color: #5448cb;
+    font-size: 14px !important;
+    font-weight: bold;
+  }
+  .labelHead-text {
+    font-size: 14px !important;
+  }
+  .card_header_text {
+    font-weight: 800;
+  }
+  .header-ios ion-toolbar:last-of-type {
+    --border-width: 0 0 0.55px;
+    --min-height: 61px;
+  }
+
+  .header {
+    background: linear-gradient(#4d40d0, #1607bf);
+    color: #fff;
   }

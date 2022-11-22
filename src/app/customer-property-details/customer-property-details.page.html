@@ -9,26 +9,38 @@
 </ion-header>
 
 <ion-content style="max-height: 630px !important;">
-  <div>
+  <ion-grid>
     <ion-row>
-      <ion-col>
-        <ion-badge style="margin: 16px 10px 0px 10px;padding: 10px;width: 100px;height: 31px;">
+      <ion-col style="text-align: end;">
+        <ion-badge style="padding: 10px;height: 31px;width: fit-content;background-color: #d08b15;" *ngIf="showBranch">
           <ion-text class="font-10"><b>{{branchName?.BRANCH_DESC}}</b></ion-text>
-          <ion-icon name="close-circle" style="font-size: 24px;float: right;position: relative;top: -57%;"></ion-icon>
+          <ion-icon name="close-circle" style="font-size: 24px;float: right;position: relative;left:4px;top: -57%;" (click)="clearBranch()">
+          </ion-icon>
         </ion-badge>
       </ion-col>
       <ion-col>
-        <ion-badge style="margin: 15px 0px 0px -68px;padding: 10px;width: 100px;height: 31px;">
-          <ion-text class="font-10"><b>{{branchName?.BRANCH_DESC}}</b></ion-text>
-          <ion-icon name="close-circle" style="font-size: 24px;float: right;position: relative;top: -57%;"></ion-icon>
+        <ion-badge style="padding: 10px;height: 31px;width: fit-content;background-color: #d08b15;"
+          *ngIf="showLocation">
+          <ion-text class="font-10"><b>{{locationName?.LOCATION_DESC}}</b></ion-text>
+          <ion-icon name="close-circle" style="font-size: 24px;float: right;position: relative;left:4px;top: -57%;" (click)="clearLocation()">
+          </ion-icon>
         </ion-badge>
       </ion-col>
     </ion-row>
-  </div>
-  <ion-col size="6" style="z-index: 1;">
+    <ion-row>
+      <ion-col size="12">
+        <ion-badge style="padding: 10px;height: 31px;width: fit-content;background-color: #d08b15;" *ngIf="showProperty">
+          <ion-text class="font-10"><b>{{propertyDesc}}</b></ion-text>
+          <ion-icon name="close-circle" style="font-size: 24px;float: right;position: relative;left:4px;top: -57%;" (click)="clearProperty()">
+          </ion-icon>
+        </ion-badge>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-col size="6" style="z-index: 1;" *ngIf="showBranchField">
     <select id="selectbutton" [(ngModel)]="branch" class="custom-search-input" (change)="getLocationdata(branch)">
-      <option [ngValue]="undefined" disabled>
-        Branch
+      <option [ngValue]="undefined" selected disabled>
+        Select Branch
       </option>
       <option *ngFor="let branch of branchlist1; let i = index" [ngValue]="branch.BRANCH_ID">
         {{branch.BRANCH_DESC}}
@@ -37,43 +49,18 @@
     </select>
   </ion-col>
 
-  <ion-col size="6" style="z-index: 1;">
+  <ion-col size="6" style="z-index: 1;" *ngIf="showLocationField">
     <select id="selectbutton" [(ngModel)]="branchlocation" (change)="newPropertyCode(branchlocation)"
       class="custom-search-input">
       <option [ngValue]="undefined" selected disabled>
-        Location
+        Select Location
       </option>
       <option *ngFor="let location of customerlocation; let i = index" [ngValue]="location.LOCATION_ID">
         {{location.LOCATION_DESC}}
       </option>
     </select>
   </ion-col>
-  <!-- <ion-row>
-    <ion-col size="6" style="z-index: 1;">
-      <select id="selectbutton" [(ngModel)]="branch" class="custom-search-input" (change)="getLocationdata(branch)">
-        <option [ngValue]="undefined" selected disabled>
-          Branch
-        </option>
-        <option *ngFor="let branch of branchlist1; let i = index" [ngValue]="branch.BRANCH_ID">
-          {{branch.BRANCH_DESC}}
-        </option>
-      </select>
-    </ion-col>
-
-    <ion-col size="6" style="z-index: 1;">
-      <select id="selectbutton" [(ngModel)]="branchlocation" (change)="newPropertyCode(branchlocation)"
-        class="custom-search-input">
-        <option [ngValue]="undefined" selected disabled>
-          Location
-        </option>
-        <option *ngFor="let location of customerlocation; let i = index" [ngValue]="location.LOCATION_ID">
-          {{location.LOCATION_DESC}}
-        </option>
-      </select>
-    </ion-col>
-  </ion-row> -->
-
-  <div size="12" style="z-index: 1;">
+  <div size="12" style="z-index: 1;" *ngIf="showPropertyCodeField">
     <ion-searchbar [(ngModel)]="propertycode" Enter Property Code type="text" debounce="500"
       class="custom-search-input-autocomplete" (ionInput)="getPropertyCode($event)">
     </ion-searchbar>
@@ -87,7 +74,7 @@
         No Data found..
       </ion-item>
     </ion-list>
-    <button class="custom-search-botton" type="submit" (click)="filterRecords()">Filter</button>
+    <!-- <button class="custom-search-botton" type="submit" (click)="filterRecords()">Filter</button> -->
   </div>
   <center *ngIf="!showdata"
     style="text-align: center;font-weight: bold;font-size: 17px;margin-top: 5px;color: #000 !important;">
@@ -103,7 +90,10 @@
           <ion-col>
             <center> <b style="float: left;">#{{items.ROW_NUM}}</b> <b>Property Details</b><b>
                 <div class="dropdown" style="float: right;">
-                  <button class="dropbtn" style="background: none;"><ion-icon  style="float: right;font-size: x-large;color: #fff;" name="ellipsis-vertical-circle"></ion-icon></button>
+                  <button class="dropbtn" style="background: none;">
+                    <ion-icon style="float: right;font-size: x-large;color: #fff;" name="ellipsis-vertical-circle">
+                    </ion-icon>
+                  </button>
                   <div class="dropdown-content">
                     <a href="javascript:void(0);">View Status</a>
                     <a href="javascript:void(0);">Create Issue</a>
@@ -143,12 +133,9 @@
             <ion-label class="labelData-text">{{items.property_desc}}
             </ion-label>
           </ion-col>
-          <ion-col size-sm="6" size="6" size-md="6" size-lg="6" size-xl="6"></ion-col>
-          <ion-col size-sm="6" size="6" size-md="6" size-lg="6" size-xl="6">
+          <ion-col size-sm="6" size="12" size-md="6" size-lg="6" size-xl="6" class="col-card-arrow">
             <a (click)="showmore(i)">
-              <ion-icon id="imageidvalsp{{0+i}}" name="caret-down-circle"
-                style="font-size: 21px;background: #607d8b;color: white;border-radius: 50%;width: 26px;height: 26px;text-align: center;position: relative;bottom: 12px;box-shadow: 0 2px 8px 0 rgba(0,0,0,0.3), 0 4px 20px 0 rgba(0,0,0,0.3);">
-              </ion-icon>
+              <img id="imageidvalsp{{0+i}}" src="assets/arrow/downarrow.png">
             </a>
           </ion-col>
           <div id="dividvalsp{{0+i}}" style="display:none;">
@@ -251,12 +238,9 @@
                 <ion-label class="labelData-text">{{items.Rentamount}}
                 </ion-label>
               </ion-col>
-              <ion-col size-sm="6" size="6" size-md="6" size-lg="6" size-xl="6"></ion-col>
-              <ion-col size-sm="6" size="6" size-md="6" size-lg="6" size-xl="4">
+              <ion-col size-sm="6" size="12" size-md="6" size-lg="6" size-xl="4" class="col-card-arrow">
                 <a (click)="showless(i)">
-                  <ion-icon name="caret-up-circle"
-                    style="font-size: 21px;background: #607d8b;color: white;border-radius: 50%;width: 26px;height: 26px;text-align: center;position: relative;bottom: 12px;box-shadow: 0 2px 8px 0 rgba(0,0,0,0.3), 0 4px 20px 0 rgba(0,0,0,0.3);">
-                  </ion-icon>
+                  <img src="assets/arrow/toparrow.png">
                 </a>
               </ion-col>
             </ion-row>
@@ -276,7 +260,7 @@
     </ion-fab-button>
   </ion-fab>
   <ion-tab-bar slot="bottom" class="ion-no-border">
-    <ion-tab-button>
+    <ion-tab-button (click)="gotoCustomer()">
       <img src="assets/tab_bar/Customer.png" /> Customer
     </ion-tab-button>
 
@@ -288,7 +272,7 @@
       <path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd">
       </path>
     </svg>
-    <ion-tab-button class="notifs">
+    <ion-tab-button class="notifs" (click)="gotoAdditional()">
       <img src="assets/tab_bar/Aditional_charge.png" /> Additional
     </ion-tab-button>
     <ion-tab-button>
